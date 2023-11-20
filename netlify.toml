@@ -1,8 +1,0 @@
-[build]
-  command = "npm run netlify-build"
-  functions = "api/"
-  publish = ".next"
-
-
-[dev]
-  command = "npm run dev"
