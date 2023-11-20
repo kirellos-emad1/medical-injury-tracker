@@ -214,7 +214,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
             />
           </Form.Item>
           <Divider />
-          <div className="flex">
+          <div className="flex flex-warp">
             <div
               style={{ position: "relative", width: "500px", height: "500px" }}
             >
