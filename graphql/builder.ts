@@ -49,5 +49,4 @@ builder.queryField("getUserData", (t) =>
     },
   })
 );
-
 builder.mutationType({});
