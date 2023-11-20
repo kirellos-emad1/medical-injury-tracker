@@ -1,6 +1,8 @@
 [build]
   command = "npm run netlify-build"
   functions = "api/"
+  publish = "public/"
+
 
 [dev]
   command = "npm run dev"
