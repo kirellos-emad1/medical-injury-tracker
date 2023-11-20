@@ -103,7 +103,7 @@ npm dev
 
 to interact with the app.
 
-Folder Structure
+### Folder Structure
 - components
   - CreateReportModel.tsx
   - DeleteModel.tsx
