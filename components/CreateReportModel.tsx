@@ -73,7 +73,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
 }) => {
   const { data } = useQuery(user);
   const userId = data?.getUserData?.id || null;
-  console.log(data,userId)
+  
   const [clickedPoints, setClickedPoints] = useState<
     { x: number; y: number }[]
   >([]);
