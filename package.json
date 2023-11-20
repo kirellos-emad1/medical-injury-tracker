@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "netlify-build": "npm run prisma-generate && npm run build",
-    "prisma-generate": "npx prisma generate --data-proxy  "
+    "vercel-build": "npx prisma generate && next build"
+
     
   },
   "dependencies": {
