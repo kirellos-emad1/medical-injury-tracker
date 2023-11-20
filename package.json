@@ -6,7 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "netlify-build": "npm run prisma-generate && npm run build",
+    "prisma-generate": "npx prisma generate "
+    
   },
   "dependencies": {
     "@ant-design/icons": "^5.2.6",

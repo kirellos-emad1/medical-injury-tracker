@@ -9,7 +9,7 @@ export default createYoga<{
 }>({
   schema,
   context: createContext,
-  graphqlEndpoint: "/api/graphql",
+  graphqlEndpoint: "/.netlify/functions/graphql",
 });
 
 export const config = {
