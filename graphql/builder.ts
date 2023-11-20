@@ -21,7 +21,6 @@ builder.queryType({
     }),
   }),
 });
-builder.inputType("InjuryInput", {
 builder.prismaObject("User", {
   fields: (t) => ({
     id: t.exposeID("id"),
