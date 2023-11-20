@@ -147,7 +147,9 @@ Folder Structure
 - GraphQL
 - Auth0
 - Pothos
-## Live Link Medical Injury Tracker
+## Live Link 
+
+https://medical-injury-tracker.vercel.app
 
 
 
