@@ -1,7 +1,7 @@
 import { builder } from "./builder";
 
-import "./types/InjuryList.ts";
-import "./types/User.ts";
-import "./types/Injury.ts";
+import "./types/index";
+// import "./types/User";
+// import "./types/Injury";
 
 export const schema = builder.toSchema();
