@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const { user } = useUser();
   return (
     <header className="text-gray-600 body-font bg-white">
-      <div className="flex items-center justify-between w-full h-20 bg-white border-b-2 z-40 md:fixed">
+      <div className="flex items-center justify-between w-full h-20 bg-white border-b-2">
         <div className="ml-6 md:ml-5">
           <Link
             href="/"
