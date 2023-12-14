@@ -217,13 +217,13 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
           <Divider />
           <div className="flex max-md:flex-col">
             <div
-              style={{ position: "relative", width: "500px", height: "500px" }}
+              style={{ position: "relative", width: "100%" }}
             >
               <img
                 src="body.png"
                 alt=""
-                width={500}
-                height={500}
+                width={"100%"}
+                height={"100%"}
                 onClick={addInjuryFields}
                 style={{ position: "relative" }}
               />
