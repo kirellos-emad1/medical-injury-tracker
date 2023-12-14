@@ -4,11 +4,10 @@ import Image from "next/image";
 
 const MeanContent: React.FC = () => {
   return (
-    <section className="flex  items-center bg-gray-100">
+    <section className="flex max-md:flex-col max-md:pt-20 items-center bg-gray-100">
       <title>Home</title>
-
-      <div className=" w-1/2 mx-36">
-        <div className="mr-auto place-self-center">
+      <div className=" w-1/2 mx-36 max-md:w-auto ">
+        <div className="">
           <p className="text-2xl font-semibold font-sans mb-8  text-teal-500">
             Less Hassle, More Care
           </p>
@@ -20,17 +19,8 @@ const MeanContent: React.FC = () => {
             management to daily logs.
           </p>
         </div>
-        <div className="mt-10">
-          {/* <span className="text-sm font-medium">Sign In Now</span> */}
-          <Link
-            href="/api/auth/login"
-            className="bg-teal-300 border-0 hover:transition   py-2  px-8 focus:outline-none font-medium hover:bg-teal-500 rounded text-base mt-4 md:mt-0"
-          >
-            Sign in
-          </Link>
-        </div>
       </div>
-      <div className="img-float ">
+      <div className="img-float max-md:mb-20 ">
         <picture>
           <source srcSet="https://home.lief.care/wp-content/uploads/2023/05/h1-img.webp 970w, https://home.lief.care/wp-content/uploads/2023/05/h1-img-300x195.webp 300w, https://home.lief.care/wp-content/uploads/2023/05/h1-img-768x500.webp 768w" />
           <Image

@@ -36,6 +36,7 @@ const InjuryFormFields: React.FC<InjuryFormFieldsProps> = ({
     <div key={index} className="w-full ">
       <Form.Item label={`Area`} required>
         <Input
+          className="max-md w-5/6"
           name={`area`}
           placeholder={`Area`}
           value={injury.area}
@@ -44,6 +45,7 @@ const InjuryFormFields: React.FC<InjuryFormFieldsProps> = ({
       </Form.Item>
       <Form.Item label={`Description`} required>
         <Input
+          className="max-md w-5/6"
           name={`description`}
           placeholder={`Description`}
           value={injury.description}

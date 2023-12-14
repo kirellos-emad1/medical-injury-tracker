@@ -248,6 +248,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
           <Form.Item label="Reporter Name" required>
             <Input
               name="reporter"
+              className="w-1/2 max-md:w-full"
               placeholder="Reporter Name"
               value={injuryLists.reporter}
               onChange={(e) =>
@@ -257,6 +258,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
           </Form.Item>
           <Form.Item name="date" label="Date" required>
             <DatePicker
+              className="w-1/2 max-md:w-full"
               placeholder={injuryLists.date}
               onChange={(date, dateString) =>
                 setInjuryLists({ ...injuryLists, date: dateString })
@@ -267,7 +269,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
 
           <div className="">
             {isCreate ? (
-              <div className="flex">
+              <div className="flex max-md:flex-col">
                 <div
                   style={{
                     position: "relative",
@@ -299,7 +301,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
                     ></div>
                   ))}
                 </div>
-                <div className="border w-1/2 h-96 flex flex-col items-start justify-start overflow-auto rounded">
+                <div className="border w-1/2 max-md:w-full h-96 flex flex-col items-start justify-start overflow-auto rounded">
                   <InjuryListFields
                     injuries={injuries}
                     handleInputChange={handleInputChange}
@@ -309,7 +311,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
                 </div>
               </div>
             ) : (
-              <div className="flex">
+              <div className="flex max-md:flex-col">
                 <div
                   style={{
                     position: "relative",
@@ -327,7 +329,7 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
                   />
                 </div>
                 {injuryLists.injuries.length > 0 ? (
-                  <div className="border w-1/2 h-96 flex flex-col items-start justify-start overflow-auto rounded">
+                  <div className="border max-md:w-full w-1/2 h-96 flex flex-col items-start justify-start overflow-auto rounded">
                     <InjuryListFields
                       injuries={injuryLists.injuries}
                       handleInputChange={(index, event) =>

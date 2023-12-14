@@ -7,7 +7,7 @@ const Header: React.FC = () => {
   const { user } = useUser();
   return (
     <header className="text-gray-600 body-font bg-white">
-      <div className="flex items-center justify-between w-full h-20 bg-white border-b-2 z-40 fixed">
+      <div className="flex items-center justify-between w-full h-20 bg-white border-b-2 z-40 md:fixed">
         <div className="ml-6 md:ml-5">
           <Link
             href="/"
@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             <div className="flex items-center space-x-5">
               <Link
                 href="/api/auth/logout"
-                className=" md:inline-flex items-center bg-red-500 text-black border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded text-base mt-4 md:mt-0"
+                className=" md:inline-flex items-center bg-red-500 text-black border-0 py-1 px-3 focus:outline-none hover:bg-red-400 rounded text-base  md:mt-0"
               >
                 Logout
               </Link>
@@ -44,7 +44,7 @@ const Header: React.FC = () => {
           ) : (
             <Link
               href="/api/auth/login"
-              className="inline-flex items-center mr-8 bg-teal-300 font-medium border-0 py-1 px-3 focus:outline-none hover:bg-teal-400 rounded text-base mt-4 md:mt-0"
+              className="inline-flex items-center mr-5 text-black bg-teal-300 font-medium border-0 py-1 px-3 focus:outline-none hover:bg-teal-400 rounded md:mt-0"
             >
               Login
             </Link>

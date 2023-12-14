@@ -205,16 +205,17 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
         <Divider />
         <Form {...layout} name="control-hooks" onFinish={onSubmit}>
           <Form.Item name="reporter" label="Reporter Name" required>
-            <Input placeholder="Reporter Name" />
+            <Input placeholder="Reporter Name"  className="w-1/2 max-md:w-full"/>
           </Form.Item>
           <Form.Item name="date" label="Date" required>
             <DatePicker
+            className="w-1/2 max-md:w-full"
               placeholder="yyyy-mm-dd"
               onChange={(date, dateString) => setDate(dateString)}
             />
           </Form.Item>
           <Divider />
-          <div className="flex flex-warp">
+          <div className="flex max-md:flex-col">
             <div
               style={{ position: "relative", width: "500px", height: "500px" }}
             >
@@ -243,7 +244,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
               ))}
             </div>
             {showInjuries ? (
-              <div className="border w-1/2 h-96 flex flex-col items-start justify-start overflow-auto rounded">
+              <div className="border w-1/2 max-md:w-full h-96 flex flex-col items-start justify-start overflow-auto rounded mb-4">
                 <InjuryListFields
                   injuries={injuries}
                   handleInputChange={handleInputChange}
@@ -252,7 +253,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
                 />
               </div>
             ) : (
-              <div className="border w-1/2 h-96 flex items-center justify-center overflow-auto rounded">
+              <div className="border max-md:w-full w-1/2 h-96 flex items-center justify-center overflow-auto rounded mb-4">
                 <p className=" font-sans font-medium text-gray-500">
                   Click on photo to create injury.
                 </p>

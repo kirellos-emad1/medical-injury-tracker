@@ -186,14 +186,14 @@ const InjuryListTable: React.FC = () => {
         isClosed={isCreateModelClosed}
       />
 
-      <div style={{ marginBottom: "16px", marginTop: "16px" }}>
+      <div className=" w-full my-4 flex items-center justify-center flex-col">
         <Input
+          className=" w-2/5 max-md:w-full "
           placeholder="Search by Reporter name"
           value={query}
           onChange={(e) => updateQuery(e.target.value)}
         />
-        <RangePicker
-          style={{ marginLeft: "140px", marginTop: "20px" }}
+        <RangePicker          
           onChange={handleDatePickerChange}
           value={
             dateRange
