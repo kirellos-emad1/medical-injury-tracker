@@ -273,15 +273,14 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
                 <div
                   style={{
                     position: "relative",
-                    width: "500px",
-                    height: "500px",
+                    width: "100%"
                   }}
                 >
                   <img
                     src="body.png"
                     alt=""
-                    width={500}
-                    height={500}
+                    width={"100%"}
+                    height={"100%"}
                     onClick={addInjuryFields}
                     style={{ position: "relative" }}
                   />
@@ -315,15 +314,14 @@ const EditReportModel: React.FC<EditReportModelProps> = ({
                 <div
                   style={{
                     position: "relative",
-                    width: "500px",
-                    height: "500px",
+                    width: "100%",
                   }}
                 >
                   <img
                     src="body.png"
                     alt=""
-                    width={500}
-                    height={500}
+                    width={"100%"}
+                    height={"100%"}
                     style={{ position: "relative" }}
                     onClick={addInjuryFields}
                   />
