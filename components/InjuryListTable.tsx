@@ -196,7 +196,6 @@ const InjuryListTable: React.FC = () => {
         <RangePicker
           className="max-md:w-1/2"          
           onChange={handleDatePickerChange}
-          popupStyle={{width:"50px"}}
           value={
             dateRange
               ? [
