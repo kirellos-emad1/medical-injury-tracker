@@ -193,7 +193,8 @@ const InjuryListTable: React.FC = () => {
           value={query}
           onChange={(e) => updateQuery(e.target.value)}
         />
-        <RangePicker          
+        <RangePicker
+          className="max-md:w-1/2"          
           onChange={handleDatePickerChange}
           value={
             dateRange
