@@ -153,6 +153,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
             const promises = injuries.map(({ area, description }) => {
               if (!area || !description) {
                 console.log("add area and description");
+                return
               } else {
                 createInjury({
                   variables: {
