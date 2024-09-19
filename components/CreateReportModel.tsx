@@ -66,6 +66,39 @@ interface CreateReportModelProps {
   isOpened: boolean;
   isClosed: () => void;
 }
+const RefetchInjuryList = gql`
+  query {
+    getUserData {
+      id
+      injuryLists {
+        id
+        reporter
+        date
+        injuries {
+          id
+          area
+          description
+        }
+      }
+    }
+  }
+`;
+
+const DeleteInjuryListMutation = gql`
+  mutation deleteInjuryList($injuryListId: String!) {
+    deleteInjuryList(injuryListId: $injuryListId) {
+      id
+      reporter
+    }
+  }
+`;
+const DeleteInjury = gql`
+  mutation deleteInjury($injuryId: String!) {
+    deleteInjury(injuryId: $injuryId) {
+      id
+    }
+  }
+`;
 
 const CreateReportModel: React.FC<CreateReportModelProps> = ({
   isOpened,
@@ -94,6 +127,9 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
   const [createInjury] = useMutation(CreateInjuryMutation, {
     onCompleted: () => setInjuries([{ id: "", area: "", description: "" }]),
     refetchQueries: [user],
+  });
+  const [deleteInjuryList] = useMutation(DeleteInjuryListMutation, {
+    refetchQueries: [RefetchInjuryList],
   });
 
   const addInjuryFields = (e: React.MouseEvent) => {
@@ -153,6 +189,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
             const promises = injuries.map(({ area, description }) => {
               if (!area || !description) {
                 console.log("add area and description");
+                deleteInjuryList({variables:{id: result.data.createInjuryList.id}})
                 return
               } else {
                 createInjury({
