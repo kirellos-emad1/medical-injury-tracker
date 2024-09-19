@@ -66,39 +66,6 @@ interface CreateReportModelProps {
   isOpened: boolean;
   isClosed: () => void;
 }
-const RefetchInjuryList = gql`
-  query {
-    getUserData {
-      id
-      injuryLists {
-        id
-        reporter
-        date
-        injuries {
-          id
-          area
-          description
-        }
-      }
-    }
-  }
-`;
-
-const DeleteInjuryListMutation = gql`
-  mutation deleteInjuryList($injuryListId: String!) {
-    deleteInjuryList(injuryListId: $injuryListId) {
-      id
-      reporter
-    }
-  }
-`;
-const DeleteInjury = gql`
-  mutation deleteInjury($injuryId: String!) {
-    deleteInjury(injuryId: $injuryId) {
-      id
-    }
-  }
-`;
 
 const CreateReportModel: React.FC<CreateReportModelProps> = ({
   isOpened,
@@ -128,9 +95,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
     onCompleted: () => setInjuries([{ id: "", area: "", description: "" }]),
     refetchQueries: [user],
   });
-  const [deleteInjuryList] = useMutation(DeleteInjuryListMutation, {
-    refetchQueries: [RefetchInjuryList],
-  });
+
 
   const addInjuryFields = (e: React.MouseEvent) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -172,49 +137,53 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
     ]);
   };
 
-  const onSubmit = async (values: FormValues) => {
-    const { reporter } = values;
-    const variables = { reporter, date: date, userId: userId };
-    if (!reporter || !date) {
-      console.log("you must fill the form");
-    } else {
-      try {
-        toast
-          .promise(createInjuryList({ variables }), {
-            loading: "Creating injury list...",
-            success: "Injury list successfully created! 🎉",
-            error: "Failed to create injury list. Please try again.",
-          })
-          .then((result) => {
-            const promises = injuries.map(({ area, description }) => {
-              if (!area || !description) {
-                console.log("add area and description");
-                deleteInjuryList({variables:{id: result.data.createInjuryList.id}})
-                return
-              } else {
-                createInjury({
-                  variables: {
-                    injuryListId: result.data.createInjuryList.id,
-                    area,
-                    description,
-                  },
-                });
-              }
-            });
-            toast.promise(Promise.all(promises), {
-              loading: "Creating new injuries...",
-              success: "Injuries successfully created! 🎉",
-              error: "Failed to create injuries. Please try again.",
-            });
-            isClosed();
-            setClickedPoints([]);
-          });
-      } catch (error) {
-        console.error(error);
-        toast.error("An unexpected error occurred. Please try again.");
+const onSubmit = async (values: FormValues) => {
+  const { reporter } = values;
+  const variables = { reporter, date, userId };
+
+  if (!reporter || !date) {
+    console.log("You must fill the form");
+  }
+
+  try {
+    // Promise to create the injury list
+    const result = await toast.promise(createInjuryList({ variables }), {
+      loading: "Creating injury list...",
+      success: "Injury list successfully created! 🎉",
+      error: "Failed to create injury list. Please try again.",
+    });
+
+    // Handle the injuries
+    const promises = injuries.map(({ area, description }) => {
+      if (!area || !description) {
+        console.log("Add area and description");
       }
-    }
-  };
+
+      // Create the injury if area and description are provided
+      return createInjury({
+        variables: {
+          injuryListId: result.data.createInjuryList.id,
+          area,
+          description,
+        },
+      });
+    });
+
+    // Wait for all injury creation promises to resolve
+    await toast.promise(Promise.all(promises), {
+      loading: "Creating new injuries...",
+      success: "Injuries successfully created! 🎉",
+      error: "Failed to create injuries. Please try again.",
+    });
+
+    // Reset and close
+    isClosed();
+    setClickedPoints([]);
+  } catch (error) {
+    console.error(error);
+    toast.error("An unexpected error occurred. Please try again.");
+  }
+};
   const onCancel = () => {
     setInjuries([{ id: "", area: "", description: "" }]);
     setDate("");
