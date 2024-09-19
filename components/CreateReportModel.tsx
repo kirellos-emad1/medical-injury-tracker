@@ -136,58 +136,45 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
   };
 
 const onSubmit = async (values: FormValues) => {
-  const { reporter } = values;
-  const variables = { reporter, date, userId };
-
-  if (!reporter || !date) {
-    console.log("You must fill the form");
-  }
-    if (!injuries || injuries.length === 0) {
-    console.log("No injuries to report");
-  }
-
-  // Validate all injuries before proceeding
-  for (const { area, description } of injuries) {
-    if (!area || !description) {
-      console.log("Add area and description for all injuries");
+    const { reporter } = values;
+    const variables = { reporter, date: date, userId: userId };
+    if (!reporter || !date) {
+      console.log("you must fill the form");
+    } else {
+      try {
+        const promises = injuries.map(({ area, description }) => {
+          if (!area || !description) {
+            console.log("you must fill the form");
+            return
+          }
+          toast.promise(createInjuryList({ variables }), {
+            loading: "Creating injury list...",
+            success: "Injury list successfully created! 🎉",
+            error: "Failed to create injury list. Please try again.",
+          })
+            .then((result) => {
+              createInjury({
+                variables: {
+                  injuryListId: result.data.createInjuryList.id,
+                  area,
+                  description,
+                },
+              });
+            });
+          toast.promise(Promise.all(promises), {
+            loading: "Creating new injuries...",
+            success: "Injuries successfully created! 🎉",
+            error: "Failed to create injuries. Please try again.",
+          });
+          isClosed();
+          setClickedPoints([]);
+        });
+      } catch (error) {
+        console.error(error);
+        toast.error("An unexpected error occurred. Please try again.");
+      }
     }
-  }
-
-  try {
-    // Promise to create the injury list
-    const result = await toast.promise(createInjuryList({ variables }), {
-      loading: "Creating injury list...",
-      success: "Injury list successfully created! 🎉",
-      error: "Failed to create injury list. Please try again.",
-    });
-
-    // Handle the injuries
-    const promises = injuries.map(({ area, description }) => {
-      // Create the injury if area and description are provided
-      return createInjury({
-        variables: {
-          injuryListId: result.data.createInjuryList.id,
-          area,
-          description,
-        },
-      });
-    });
-
-    // Wait for all injury creation promises to resolve
-    await toast.promise(Promise.all(promises), {
-      loading: "Creating new injuries...",
-      success: "Injuries successfully created! 🎉",
-      error: "Failed to create injuries. Please try again.",
-    });
-
-    // Reset and close
-    isClosed();
-    setClickedPoints([]);
-  } catch (error) {
-    console.error(error);
-    toast.error("An unexpected error occurred. Please try again.");
-  }
-};
+  };
   const onCancel = () => {
     setInjuries([{ id: "", area: "", description: "" }]);
     setDate("");
