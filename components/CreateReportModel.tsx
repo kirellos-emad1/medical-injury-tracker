@@ -78,9 +78,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
     { x: number; y: number }[]
   >([]);
   const [date, setDate] = useState("");
-  const [injuries, setInjuries] = useState<Injury[]>([
-    { id: "", area: "", description: "" },
-  ]);
+  const [injuries, setInjuries] = useState<Injury[]>([]);
   const [showInjuries, setShowInjuries] = useState(false);
 
   const [createInjuryList, { loading }] = useMutation(
@@ -92,7 +90,7 @@ const CreateReportModel: React.FC<CreateReportModelProps> = ({
   );
 
   const [createInjury] = useMutation(CreateInjuryMutation, {
-    onCompleted: () => setInjuries([{ id: "", area: "", description: "" }]),
+    onCompleted: () => setInjuries([]),
     refetchQueries: [user],
   });
 
@@ -144,6 +142,16 @@ const onSubmit = async (values: FormValues) => {
   if (!reporter || !date) {
     console.log("You must fill the form");
   }
+    if (!injuries || injuries.length === 0) {
+    console.log("No injuries to report");
+  }
+
+  // Validate all injuries before proceeding
+  for (const { area, description } of injuries) {
+    if (!area || !description) {
+      console.log("Add area and description for all injuries");
+    }
+  }
 
   try {
     // Promise to create the injury list
@@ -155,10 +163,6 @@ const onSubmit = async (values: FormValues) => {
 
     // Handle the injuries
     const promises = injuries.map(({ area, description }) => {
-      if (!area || !description) {
-        console.log("Add area and description");
-      }
-
       // Create the injury if area and description are provided
       return createInjury({
         variables: {
